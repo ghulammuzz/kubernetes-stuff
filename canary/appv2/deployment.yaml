@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flexmaster-deployment
+  labels:
+    app: flexmaster-app
+    version: v2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flexmaster-app
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: flexmaster-app
+        version: v2
+    spec:
+      containers:
+      - name: flexmaster
+        image: ghulammuzz/flexmaster:9b3ccb6
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "500m"    
+          limits:
+            memory: "256Mi"
+            cpu: "1"     
+        envFrom:
+        - configMapRef:
+            name: flexmaster-env
+        ports:
+        - containerPort: 8000
+      imagePullSecrets:
+      - name: dockerkey

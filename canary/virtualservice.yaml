@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: flexmaster-vsvc
+spec:
+  hosts:
+    - "fm.ghulammuzz.com"
+  http:
+  - route:
+    - destination:
+        host: flexmaster-service
+        subset: v1
+      weight: 75
+    - destination:
+        host: flexmaster-service
+        subset: v2
+      weight: 25
