@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: flexmaster-cert-tls
+  namespace: flexmaster
+spec:
+  secretName: flexmaster-secret
+  issuerRef:
+    name: le-issuer
+    kind: ClusterIssuer
+  dnsNames:
+    - fm.ghulammuzz.com

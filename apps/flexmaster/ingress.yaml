@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flexmaster-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    spec.ingressClassName: traefik
+spec:
+  # ingressClassName: nginx
+  tls:
+  - hosts:
+    - fm.ghulammuzz.com
+    secretName: flexmaster-cert-tls
+  rules:
+  - host: "fm.ghulammuzz.com"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: flexmaster-service
+            port:
+              number: 80

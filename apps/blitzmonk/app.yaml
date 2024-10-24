@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blitzmonk-deployment
+  labels:
+    app: blitzmonk-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blitzmonk-app
+  template:
+    metadata:
+      labels:
+        app: blitzmonk-app
+    spec:
+      containers:
+      - name: blitzmonk
+        image: ghulammuzz/blitzmonk:c619ee2
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "500m"    
+          limits:
+            memory: "256Mi"
+            cpu: "1"     
+        envFrom:
+        - configMapRef:
+            name: blitzmonk-env
+        ports:
+        - containerPort: 5000
+      imagePullSecrets:
+      - name: dockerkey
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blitzmonk-service
+  labels:
+    app: blitzmonk-app
+spec:
+  selector:
+    app: blitzmonk-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000

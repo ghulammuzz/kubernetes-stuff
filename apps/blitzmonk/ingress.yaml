@@ -1,0 +1,27 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: blitzmonk-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    spec.ingressClassName: traefik
+    # kubernetes.io/ingress.class: traefik
+spec:
+  tls:
+    - hosts:
+        - bm.ghulammuzz.com
+      secretName: blitzmonk-cert-tls
+  rules:
+    - host: bm.ghulammuzz.com
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: blitzmonk-service
+              port:
+                number: 80
+
+
