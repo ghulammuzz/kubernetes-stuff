@@ -4,7 +4,7 @@ helm install prometheus prometheus-community/kube-prometheus-stack -f values.yam
 ```
 - grab values
 ```shell
-helm show values prometheus-community/kube-prometheus-stack --namespace monitoring -f values.yaml
+helm show values prometheus-community/kube-prometheus-stack > values.yaml
 ```
 
 - Modify node-exporter port (if faced prometheus conflict port 9100 )
