@@ -1,1 +1,4 @@
 **/config-map.yaml
+.venv
+terraform/.**
+terraform/terraform.**
