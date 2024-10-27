@@ -3,3 +3,5 @@
 .terraform
 terraform/.**
 terraform/terraform.**
+cloudflare/.env
+**_record.json
