@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flexmaster-deployment
+  labels:
+    app: flexmaster-app
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: flexmaster-app
+  template:
+    metadata:
+      labels:
+        app: flexmaster-app
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - flexmaster-app
+                topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: flexmaster
+        image: ghulammuzz/flexmaster:22a2e23
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"    
+          limits:
+            memory: "512Mi"
+            cpu: "1" 
+        livenessProbe:
+          httpGet:
+            path: /healthcheck
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /readiness
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        envFrom:
+        - configMapRef:
+            name: flexmaster-env
+        ports:
+        - containerPort: 8000
+      imagePullSecrets:
+      - name: dockerkey
