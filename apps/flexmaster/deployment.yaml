@@ -33,14 +33,14 @@ spec:
                 topologyKey: "kubernetes.io/hostname"
       containers:
       - name: flexmaster
-        image: ghulammuzz/flexmaster:22a2e23
+        image: ghulammuzz/flexmaster:7c7ba52
         resources:
           requests:
-            memory: "256Mi"
-            cpu: "250m"    
+            memory: "32Mi"
+            cpu: "250m"
           limits:
-            memory: "512Mi"
-            cpu: "1" 
+            memory: "32Mi"
+            cpu: "1"
         livenessProbe:
           httpGet:
             path: /healthcheck
