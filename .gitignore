@@ -5,5 +5,4 @@ terraform/.**
 terraform/terraform.**
 cloudflare/.env
 **_record.json
-helm/apps/configmap.yaml
 /values.yaml
