@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  flexmaster:
+  - apiVersion: v2
+    appVersion: "1.1"
+    created: "2024-10-28T14:56:32.781973951+07:00"
+    description: Helm chart for Flexmaster deployment
+    digest: cb538e91b96a6758632f7de91d02b3e18df6fd9afb8e0e941053f03f0ce8b927
+    name: flexmaster
+    urls:
+    - https://ghulammuzz.github.io/fm-chart/fm1/charts/flexmaster-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-10-28T14:56:32.781118443+07:00"
