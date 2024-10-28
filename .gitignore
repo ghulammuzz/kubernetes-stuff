@@ -5,3 +5,5 @@ terraform/.**
 terraform/terraform.**
 cloudflare/.env
 **_record.json
+flexmaster/
+/values.yaml

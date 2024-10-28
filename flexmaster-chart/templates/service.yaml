@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "flexmaster-chart.fullname" . }}-service
+  labels:
+    app: {{ include "flexmaster-chart.name" . }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: {{ include "flexmaster-chart.name" . }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
